@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import Navbar from '../components/Navbar'
-import Sidebar from '../components/Sidebar'
 import { getProductById } from '../api/products'
 import { useAuth } from '../context/AuthContext'
 import { addToCart } from '../api/cart'
@@ -28,34 +27,27 @@ function ProductDetail() {
     }
   }
 
+  if (!product) return <div className="p-6">Loading...</div>
+
   return (
     <div className="min-h-screen bg-white text-black">
       <Navbar />
-      <div className="flex">
-        <Sidebar />
-        <div className="flex-1 p-6 max-w-2xl mx-auto">
-          {!product ? (
-            <p>Loading...</p>
-          ) : (
-            <>
-              <div className="h-64 bg-gray-100 rounded-md mb-6 flex items-center justify-center text-gray-400">
-                No Image
-              </div>
-              <h1 className="text-2xl font-semibold">{product.name}</h1>
-              <p className="text-gray-500 mt-1">{product.brand}</p>
-              <p className="text-xl font-semibold mt-4">${product.price}</p>
-              <p className="mt-4 text-gray-700">{product.description}</p>
-
-              <button
-                onClick={handleAddToCart}
-                className="mt-6 bg-black text-white px-6 py-2 rounded-md text-sm hover:bg-gray-800 transition-colors"
-              >
-                Add to Cart
-              </button>
-              {message && <p className="mt-2 text-sm text-gray-600">{message}</p>}
-            </>
-          )}
+      <div className="p-6 max-w-2xl mx-auto">
+        <div className="h-64 bg-gray-100 rounded-md mb-6 flex items-center justify-center text-gray-400">
+          No Image
         </div>
+        <h1 className="text-2xl font-semibold">{product.name}</h1>
+        <p className="text-gray-500 mt-1">{product.brand}</p>
+        <p className="text-xl font-semibold mt-4">${product.price}</p>
+        <p className="mt-4 text-gray-700">{product.description}</p>
+
+        <button
+          onClick={handleAddToCart}
+          className="mt-6 bg-black text-white px-6 py-2 rounded-md text-sm hover:bg-gray-800 transition-colors"
+        >
+          Add to Cart
+        </button>
+        {message && <p className="mt-2 text-sm text-gray-600">{message}</p>}
       </div>
     </div>
   )
