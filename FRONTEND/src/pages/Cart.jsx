@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import Navbar from '../components/Navbar'
 import { useAuth } from '../context/AuthContext'
@@ -81,6 +82,15 @@ function Cart() {
 
             <div className="text-right font-semibold text-lg mt-4">
               Total: ${total.toFixed(2)}
+            </div>
+
+            <div className="text-right mt-2">
+              <Link
+                to="/checkout"
+                className="inline-block bg-black text-white px-6 py-2 rounded-md text-sm hover:bg-gray-800 transition-colors"
+              >
+                Proceed to Checkout
+              </Link>
             </div>
           </div>
         )}

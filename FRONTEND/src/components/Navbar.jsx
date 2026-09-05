@@ -15,6 +15,7 @@ function Navbar() {
       <Link to="/" className="text-xl font-bold">SoundHouse</Link>
       <div className="flex gap-6 text-sm items-center">
         <Link to="/" className="hover:underline">Home</Link>
+        <Link to="/products" className="hover:underline">Menu</Link>
         <Link to="/cart" className="hover:underline">Cart</Link>
         {token ? (
           <button onClick={handleLogout} className="hover:underline">
