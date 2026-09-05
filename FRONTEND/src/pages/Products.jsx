@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 
 import Navbar from '../components/Navbar'
-import CategoryMenu from '../components/CategoryMenu'
+import Sidebar from '../components/Sidebar'
 import { getProducts } from '../api/products'
 
 function Products() {
   const [products, setProducts] = useState([])
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
 
+  // read filters straight from the URL — e.g. /products?category=Guitars&sort=price_asc
   const category = searchParams.get('category') || ''
   const sort = searchParams.get('sort') || ''
 
@@ -16,41 +17,14 @@ function Products() {
     getProducts({ category, sort })
       .then(setProducts)
       .catch((err) => console.error(err))
-  }, [category, sort])
-
-  // when the sort dropdown changes, keep category as-is, just update sort
-  function handleSortChange(e) {
-    const newSort = e.target.value
-    const params = new URLSearchParams()
-    if (category) params.set('category', category)
-    if (newSort) params.set('sort', newSort)
-    setSearchParams(params)
-  }
+  }, [category, sort]) // re-fetch whenever the URL filters change
 
   return (
     <div className="min-h-screen bg-white text-black">
       <Navbar />
-      <CategoryMenu />
-
-      <div className="p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h1 className="text-lg font-semibold">
-            {category ? category : 'All Products'}
-          </h1>
-
-          <select
-            value={sort}
-            onChange={handleSortChange}
-            className="border border-gray-300 rounded-md p-2 text-sm bg-white"
-          >
-            <option value="">Sort By</option>
-            <option value="price_asc">Price: Low to High</option>
-            <option value="price_desc">Price: High to Low</option>
-            <option value="newest">Newest First</option>
-          </select>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div className="flex">
+        <Sidebar />
+        <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-6">
           {products.map((product) => (
             <Link key={product._id} to={`/product/${product._id}`}>
               <div className="border border-gray-200 rounded-lg p-5 hover:shadow-md transition-shadow">
