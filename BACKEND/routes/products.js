@@ -3,10 +3,31 @@ const router = express.Router()
 const Product = require('../models/Product')
 const { protect, adminOnly } = require('../middleware/auth')
 
-// GET /api/products — fetch all products
+// GET /api/products — fetch all products, with optional filter + sort
+// Example: /api/products?category=Guitars&sort=price_asc
 router.get('/', async (req, res) => {
   try {
-    const products = await Product.find()
+    const { category, sort } = req.query
+
+    // build the filter object — only add category if one was given
+    const filter = {}
+    if (category) {
+      filter.category = category
+    }
+
+    // start the query, apply filter
+    let query = Product.find(filter)
+
+    // apply sorting based on the sort value
+    if (sort === 'price_asc') {
+      query = query.sort({ price: 1 })   // low to high
+    } else if (sort === 'price_desc') {
+      query = query.sort({ price: -1 })  // high to low
+    } else if (sort === 'newest') {
+      query = query.sort({ createdAt: -1 }) // newest first
+    }
+
+    const products = await query
     res.json(products)
   } catch (error) {
     res.status(500).json({ message: 'Error fetching products', error: error.message })
