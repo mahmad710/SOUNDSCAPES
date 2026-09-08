@@ -39,7 +39,7 @@ router.post('/', protect, async (req, res) => {
 
     // Step 6: create a Safepay payment token
     const { token } = await safepay.payments.create({
-      amount: total , // rupees -> paisa
+      amount: total, // rupees -> paisa
       currency: 'PKR',
     })
 
@@ -47,8 +47,8 @@ router.post('/', protect, async (req, res) => {
     const checkoutUrl = safepay.checkout.create({
       token,
       orderId: order._id.toString(),
-      cancelUrl: 'http://localhost:5173/cancel',
-      redirectUrl: 'http://localhost:5173/success',
+      cancelUrl: `${process.env.FRONTEND_URL}/cancel`,
+      redirectUrl: `${process.env.FRONTEND_URL}/success`,
       source: 'custom',
       webhooks: true,
     })
