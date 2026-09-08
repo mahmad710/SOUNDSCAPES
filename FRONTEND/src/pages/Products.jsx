@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-
+/hjkhjk/
 import Navbar from '../components/Navbar'
 import CategoryMenu from '../components/CategoryMenu'
 import { getProducts } from '../api/products'
@@ -59,7 +59,7 @@ function Products() {
                 </div>
                 <h2 className="font-medium text-base">{product.name}</h2>
                 <p className="text-sm text-gray-500">{product.brand}</p>
-                <p className="mt-2 font-semibold">${product.price}</p>
+                <p className="mt-2 font-semibold">Rs {product.price}</p>
               </div>
             </Link>
           ))}

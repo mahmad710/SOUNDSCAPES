@@ -38,7 +38,7 @@ function ProductDetail() {
         </div>
         <h1 className="text-2xl font-semibold">{product.name}</h1>
         <p className="text-gray-500 mt-1">{product.brand}</p>
-        <p className="text-xl font-semibold mt-4">${product.price}</p>
+        <p className="text-xl font-semibold mt-4">Rs {product.price}</p>
         <p className="mt-4 text-gray-700">{product.description}</p>
 
         <button
