@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-/hjkhjk/
 import Navbar from '../components/Navbar'
 import CategoryMenu from '../components/CategoryMenu'
 import { getProducts } from '../api/products'
@@ -55,7 +54,17 @@ function Products() {
             <Link key={product._id} to={`/product/${product._id}`}>
               <div className="border border-gray-200 rounded-lg p-5 hover:shadow-md transition-shadow">
                 <div className="h-40 bg-gray-100 rounded-md mb-4 flex items-center justify-center text-gray-400 text-sm">
-                  No Image
+                  {product.images && product.images.length > 0 ? (
+                    <img
+                      src={product.images[0]}
+                      alt={product.name}
+                      className="h-40 w-full object-contain rounded-md mb-4"
+                    />
+                  ) : (
+                    <div className="h-40 bg-gray-100 rounded-md mb-4 flex items-center justify-center text-gray-400 text-sm">
+                      No Image
+                    </div>
+                  )}
                 </div>
                 <h2 className="font-medium text-base">{product.name}</h2>
                 <p className="text-sm text-gray-500">{product.brand}</p>
