@@ -1,15 +1,19 @@
+import { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
+import PianoHero from '../components/PianoHero'
+import { getProducts } from '../api/products'
 
 function Home() {
+  const [products, setProducts] = useState([])
+
+  useEffect(() => {
+    getProducts().then(setProducts).catch((err) => console.error(err))
+  }, [])
+
   return (
     <div className="min-h-screen bg-white text-black">
       <Navbar />
-      <div className="flex flex-col items-center justify-center text-center mt-32 px-6">
-        <h1 className="text-4xl font-semibold mb-4">Welcome to SoundHouse</h1>
-        <p className="text-gray-500 max-w-md">
-          Your one-stop shop for instruments — guitars, keyboards, drums, and more.
-        </p>
-      </div>
+      <PianoHero products={products} />
     </div>
   )
 }
