@@ -34,7 +34,17 @@ function ProductDetail() {
       <Navbar />
       <div className="p-6 max-w-2xl mx-auto">
         <div className="h-64 bg-gray-100 rounded-md mb-6 flex items-center justify-center text-gray-400">
-          No Image
+          {product.images && product.images.length > 0 ? (
+            <img
+              src={product.images[0]}
+              alt={product.name}
+              className="h-64 w-full object-contain rounded-md mb-6"
+            />
+          ) : (
+            <div className="h-64 bg-gray-100 rounded-md mb-6 flex items-center justify-center text-gray-400">
+              No Image
+            </div>
+          )}
         </div>
         <h1 className="text-2xl font-semibold">{product.name}</h1>
         <p className="text-gray-500 mt-1">{product.brand}</p>
