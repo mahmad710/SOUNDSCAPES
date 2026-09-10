@@ -34,17 +34,9 @@ h1, h2 {
 }
 
 body {
-  background: var(--bg);
+  margin: 0;
 }
 
-
-
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
 
 h1 {
   font-size: 56px;

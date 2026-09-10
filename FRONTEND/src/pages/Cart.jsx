@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Trash2, ShoppingBag } from 'lucide-react'
 
 import Navbar from '../components/Navbar'
 import { useAuth } from '../context/AuthContext'
@@ -16,6 +17,7 @@ function Cart() {
   }, [token])
 
   async function handleQuantityChange(itemId, quantity) {
+    if (quantity < 1) return
     const updated = await updateCartItem(itemId, quantity, token)
     setCart(updated)
   }
@@ -29,12 +31,21 @@ function Cart() {
     return (
       <div className="min-h-screen bg-white text-black">
         <Navbar />
-        <p className="p-6">Please log in to see your cart.</p>
+        <p className="pt-24 text-center text-gray-400">
+          Please log in to see your cart.
+        </p>
       </div>
     )
   }
 
-  if (!cart) return <div className="p-6">Loading...</div>
+  if (!cart) {
+    return (
+      <div className="min-h-screen bg-white text-black">
+        <Navbar />
+        <p className="pt-24 text-center text-gray-400">Loading...</p>
+      </div>
+    )
+  }
 
   const total = cart.items.reduce(
     (sum, item) => sum + item.product.price * item.quantity,
@@ -44,54 +55,83 @@ function Cart() {
   return (
     <div className="min-h-screen bg-white text-black">
       <Navbar />
-      <div className="p-6 max-w-2xl mx-auto">
-        <h1 className="text-2xl font-semibold mb-6">Your Cart</h1>
+      <div className="max-w-2xl mx-auto pt-24 px-6 pb-16">
+        <h1 className="font-['Fraunces'] text-3xl mb-8">Your Cart</h1>
 
         {cart.items.length === 0 ? (
-          <p className="text-gray-500">Your cart is empty.</p>
+          <div className="flex flex-col items-center text-center py-20">
+            <div className="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center mb-4">
+              <ShoppingBag size={22} className="text-gray-400" />
+            </div>
+            <p className="text-gray-400 mb-6">Your cart is empty.</p>
+            <Link
+              to="/products"
+              className="bg-black text-white px-6 py-2.5 rounded-full text-sm hover:bg-gray-800 transition-colors"
+            >
+              Browse Instruments
+            </Link>
+          </div>
         ) : (
           <div className="flex flex-col gap-4">
             {cart.items.map((item) => (
               <div
                 key={item._id}
-                className="flex items-center justify-between border border-gray-200 rounded-lg p-4"
+                className="flex items-center gap-4 bg-white/60 backdrop-blur-xl backdrop-saturate-150 border border-white/40 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.05)] p-4"
               >
-                <div>
-                  <p className="font-medium">{item.product.name}</p>
-                  <p className="text-sm text-gray-500">${item.product.price}</p>
+                <div className="w-20 h-20 bg-gray-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                  {item.product.images && item.product.images.length > 0 ? (
+                    <img
+                      src={item.product.images[0]}
+                      alt={item.product.name}
+                      className="w-full h-full object-contain p-1"
+                    />
+                  ) : (
+                    <span className="text-gray-300 text-xs">No Image</span>
+                  )}
                 </div>
-                <div className="flex items-center gap-3">
-                  <input
-                    type="number"
-                    min="1"
-                    value={item.quantity}
-                    onChange={(e) =>
-                      handleQuantityChange(item._id, Number(e.target.value))
-                    }
-                    className="w-16 border border-gray-300 rounded-md px-2 py-1 text-sm"
-                  />
+
+                <div className="flex-1 min-w-0">
+                  <p className="font-medium truncate">{item.product.name}</p>
+                  <p className="text-sm text-gray-400">Rs {item.product.price}</p>
+                </div>
+
+                <div className="flex items-center border border-gray-200 rounded-full overflow-hidden">
                   <button
-                    onClick={() => handleRemove(item._id)}
-                    className="text-sm text-red-500 hover:underline"
+                    onClick={() => handleQuantityChange(item._id, item.quantity - 1)}
+                    className="px-3 py-1.5 text-gray-500 hover:text-black transition-colors"
                   >
-                    Remove
+                    −
+                  </button>
+                  <span className="px-2 text-sm">{item.quantity}</span>
+                  <button
+                    onClick={() => handleQuantityChange(item._id, item.quantity + 1)}
+                    className="px-3 py-1.5 text-gray-500 hover:text-black transition-colors"
+                  >
+                    +
                   </button>
                 </div>
+
+                <button
+                  onClick={() => handleRemove(item._id)}
+                  className="text-gray-300 hover:text-red-500 transition-colors flex-shrink-0"
+                  aria-label="Remove item"
+                >
+                  <Trash2 size={18} />
+                </button>
               </div>
             ))}
 
-            <div className="text-right font-semibold text-lg mt-4">
-              Total: ${total.toFixed(2)}
+            <div className="flex items-center justify-between mt-6 px-2">
+              <span className="text-gray-400">Total</span>
+              <span className="text-2xl font-semibold">Rs {total.toFixed(2)}</span>
             </div>
 
-            <div className="text-right mt-2">
-              <Link
-                to="/checkout"
-                className="inline-block bg-black text-white px-6 py-2 rounded-md text-sm hover:bg-gray-800 transition-colors"
-              >
-                Proceed to Checkout
-              </Link>
-            </div>
+            <Link
+              to="/checkout"
+              className="text-center bg-black text-white rounded-full py-3 mt-4 hover:bg-gray-800 transition-colors"
+            >
+              Proceed to Checkout
+            </Link>
           </div>
         )}
       </div>

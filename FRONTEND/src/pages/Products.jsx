@@ -42,13 +42,15 @@ function Products() {
       <Navbar />
       <CategoryMenu />
 
-      <div className="p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h1 className="text-lg font-semibold">
+      <div className="pt-24 px-6 pb-6">
+        <div className="grid grid-cols-3 items-center mb-6">
+          <div />
+
+          <h1 className="text-lg font-semibold text-center">
             {category ? category : 'All Products'}
           </h1>
 
-          <div className="relative">
+          <div className="relative justify-self-end">
             <button
               onClick={() => setSortOpen(!sortOpen)}
               className="flex items-center gap-2 bg-white/60 backdrop-blur-xl backdrop-saturate-150 border border-white/40 shadow-[0_4px_20px_rgba(0,0,0,0.05)] rounded-full px-4 py-2 text-sm text-gray-600 hover:text-black transition-colors"
@@ -63,11 +65,10 @@ function Products() {
                   <button
                     key={option.value}
                     onClick={() => handleSortChange(option.value)}
-                    className={`text-left px-4 py-2 rounded-full text-sm transition-colors ${
-                      sort === option.value
+                    className={`text-left px-4 py-2 rounded-full text-sm transition-colors ${sort === option.value
                         ? 'bg-black text-white'
                         : 'text-gray-500 hover:bg-black/5 hover:text-black'
-                    }`}
+                      }`}
                   >
                     {option.label}
                   </button>
@@ -92,9 +93,11 @@ function Products() {
                     No Image
                   </div>
                 )}
-                <h2 className="font-medium text-base">{product.name}</h2>
-                <p className="text-sm text-gray-500">{product.brand}</p>
-                <p className="mt-2 font-semibold">Rs {product.price}</p>
+                <div className="text-center">
+                  <h2 className="font-medium text-base text-black">{product.name}</h2>
+                  <p className="text-sm text-gray-500">{product.brand}</p>
+                  <p className="mt-2 font-semibold">Rs {product.price}</p>
+                </div>
               </div>
             </Link>
           ))}
