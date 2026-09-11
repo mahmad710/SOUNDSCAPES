@@ -32,3 +32,23 @@ export async function createOrder(shippingAddress, token) {
   return res.json()
 }
 
+export async function getAllOrders(token) {
+  const res = await fetch(`${BASE_URL}/orders`, {
+    headers: { Authorization: `Bearer ${token}` },
+  })
+  if (!res.ok) throw new Error('Failed to fetch orders')
+  return res.json()
+}
+
+export async function updateOrderStatus(orderId, status, token) {
+  const res = await fetch(`${BASE_URL}/orders/${orderId}/status`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ status }),
+  })
+  if (!res.ok) throw new Error('Failed to update order status')
+  return res.json()
+}

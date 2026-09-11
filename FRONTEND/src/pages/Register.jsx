@@ -30,7 +30,11 @@ function Register() {
   return (
     <div
       className="min-h-screen text-black bg-cover bg-center"
-      style={{ backgroundImage: "url('https://i.pinimg.com/1200x/48/80/c0/4880c09ae4d4fbe9ddf4bb02a2e2f06c.jpg')" }}
+      style={{
+        backgroundImage: "url('https://i.pinimg.com/1200x/24/59/f4/2459f4c842324465d689f5f52dcb967c.jpg')",
+        backgroundSize: '85%',
+      }
+      }
     >
       <div className="min-h-screen bg-black/40 backdrop-blur-sm">
         <Navbar />

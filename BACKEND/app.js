@@ -13,6 +13,7 @@ const authRoutes = require('./routes/auth')
 const cartRoutes = require('./routes/cart')
 const orderRoutes=require('./routes/orders')
 const webhookRoutes = require('./routes/webhooks')
+const userRoutes = require('./routes/users')
 
 // Middleware
 
@@ -22,6 +23,7 @@ app.use('/api/auth', authRoutes)
 app.use('/api/cart', cartRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/webhooks', webhookRoutes)
+app.use('/api/users', userRoutes)
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)

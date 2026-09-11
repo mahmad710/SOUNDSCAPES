@@ -1,4 +1,4 @@
-  const BASE_URL = import.meta.env.VITE_API_URL + '/api'
+const BASE_URL = import.meta.env.VITE_API_URL + '/api'
 
 // getProducts now takes an optional filters object: { category, sort }
 export async function getProducts({ category, sort } = {}) {
@@ -17,5 +17,40 @@ export async function getProducts({ category, sort } = {}) {
 export async function getProductById(id) {
   const res = await fetch(`${BASE_URL}/products/${id}`)
   if (!res.ok) throw new Error('Failed to fetch product')
+  return res.json()
+}
+
+export async function createProduct(productData, token) {
+  const res = await fetch(`${BASE_URL}/products`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(productData),
+  })
+  if (!res.ok) throw new Error('Failed to create product')
+  return res.json()
+}
+
+export async function updateProduct(id, productData, token) {
+  const res = await fetch(`${BASE_URL}/products/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(productData),
+  })
+  if (!res.ok) throw new Error('Failed to update product')
+  return res.json()
+}
+
+export async function deleteProduct(id, token) {
+  const res = await fetch(`${BASE_URL}/products/${id}`, {
+    method: 'DELETE',
+    headers: { Authorization: `Bearer ${token}` },
+  })
+  if (!res.ok) throw new Error('Failed to delete product')
   return res.json()
 }

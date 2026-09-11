@@ -1,9 +1,11 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { Home, Grid3x3, ShoppingCart, LogIn, UserPlus, LogOut } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
+import { Shield } from 'lucide-react'
+
 
 function Navbar() {
-  const { token, logout } = useAuth()
+  const { token, logout, isAdmin } = useAuth()
   const navigate = useNavigate()
 
   function handleLogout() {
@@ -40,6 +42,19 @@ function Navbar() {
               Menu
             </span>
           </Link>
+
+          {isAdmin && (
+            <Link
+              to="/admin"
+              title="Admin"
+              className="group relative hover:text-black transition-colors"
+            >
+              <Shield size={20} />
+              <span className="pointer-events-none absolute top-full mt-2 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs bg-black text-white px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
+                Admin
+              </span>
+            </Link>
+          )}
 
           <Link
             to="/cart"

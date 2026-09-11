@@ -9,6 +9,8 @@ import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import Success from './pages/Success'
 import Cancel from './pages/Cancel'
+import Admin from './pages/Admin'
+
 
 function App() {
   return (
@@ -23,6 +25,7 @@ function App() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/success" element={<Success />} />
         <Route path="/cancel" element={<Cancel />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </BrowserRouter>
   )
