@@ -30,29 +30,36 @@ function Login() {
   }
 
   return (
+
     <div
+    className="min-h-screen text-black bg-cover bg-center"
+      style={{
+        backgroundImage: "url('https://i.pinimg.com/originals/7f/ca/1a/7fca1afa667c13818684699cfa48ed33.gif')",
+        backgroundSize: '49%',
+        backgroundPosition:' 20px'
+      }
+      }
       
-      style={{ backgroundImage: "url('https://i.pinimg.com/originals/7f/ca/1a/7fca1afa667c13818684699cfa48ed33.gif')" }}
     >
       <div className="min-h-screen bg-black/40 backdrop-blur-sm">
         <Navbar />
-        <div className="flex justify-center pt-24 px-6">
-          <div className="w-full max-w-sm bg-white/60 backdrop-blur-xl backdrop-saturate-150 border border-white/40 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.08)] p-8">
-            <div className="flex flex-col items-center mb-6">
-              <div className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center mb-4">
-                <LogIn size={20} />
+        <div className="flex justify-center pt-20 px-6">
+          <div className="w-full max-w-md bg-white/90 backdrop-blur-xl backdrop-saturate-150 border border-white/40 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.15)] p-10">
+            <div className="flex flex-col items-center mb-8">
+              <div className="w-14 h-14 rounded-full bg-black text-white flex items-center justify-center mb-5">
+                <LogIn size={22} />
               </div>
-              <h1 className="font-['Fraunces'] text-2xl">Welcome back</h1>
-              <p className="text-sm text-gray-400 mt-1">Log in to your account</p>
+              <h1 className="font-['Fraunces'] text-3xl">Welcome back</h1>
+              <p className="text-sm text-gray-600 mt-2">Log in to your account</p>
             </div>
 
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-5">
               <input
                 type="email"
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="border border-gray-200 rounded-full px-4 py-2.5 text-sm bg-white/80 focus:outline-none focus:ring-2 focus:ring-black/10"
+                className="border border-gray-200 rounded-full px-5 py-3 text-sm bg-white/80 focus:outline-none focus:ring-2 focus:ring-black/10"
                 required
               />
               <input
@@ -60,7 +67,7 @@ function Login() {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="border border-gray-200 rounded-full px-4 py-2.5 text-sm bg-white/80 focus:outline-none focus:ring-2 focus:ring-black/10"
+                className="border border-gray-200 rounded-full px-5 py-3 text-sm bg-white/80 focus:outline-none focus:ring-2 focus:ring-black/10"
                 required
               />
 
@@ -69,15 +76,15 @@ function Login() {
               <button
                 type="submit"
                 disabled={loading}
-                className="bg-black text-white rounded-full py-2.5 text-sm hover:bg-gray-800 transition-colors disabled:opacity-50"
+                className="bg-black text-white rounded-full py-3 text-sm hover:bg-gray-800 transition-colors disabled:opacity-50"
               >
                 {loading ? 'Logging in...' : 'Log In'}
               </button>
             </form>
 
-            <p className="text-sm text-center text-gray-400 mt-6">
+            <p className="text-sm text-center text-gray-600 mt-8">
               Don't have an account?{' '}
-              <Link to="/register" className="text-black hover:underline">
+              <Link to="/register" className="text-black font-medium hover:underline">
                 Sign up
               </Link>
             </p>
