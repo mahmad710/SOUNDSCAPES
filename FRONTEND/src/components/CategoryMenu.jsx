@@ -29,17 +29,17 @@ function CategoryMenu() {
   }
 
   return (
-    <div className="fixed top-28 left-4 z-30">
+    <div className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="bg-white/60 backdrop-blur-xl backdrop-saturate-150 border border-white/40 shadow-[0_4px_20px_rgba(0,0,0,0.08)] w-12 h-12 rounded-full flex items-center justify-center text-gray-600 hover:text-black transition-colors"
+        className="bg-white/60 backdrop-blur-xl backdrop-saturate-150 border border-white/40 shadow-[0_4px_20px_rgba(0,0,0,0.08)] w-10 h-10 rounded-full flex items-center justify-center text-gray-600 hover:text-black transition-colors"
         aria-label="Browse categories"
       >
-        <SlidersHorizontal size={18} />
+        <SlidersHorizontal size={16} />
       </button>
 
       {open && (
-        <div className="mt-3 bg-white/60 backdrop-blur-xl backdrop-saturate-150 border border-white/40 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.1)] w-56 p-2 flex flex-col gap-1">
+        <div className="absolute left-0 mt-2 bg-white/60 backdrop-blur-xl backdrop-saturate-150 border border-white/40 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.1)] w-56 p-2 flex flex-col gap-1 z-20">
           <button
             onClick={() => goToCategory('')}
             className={`text-left px-4 py-2 rounded-full text-sm transition-colors ${

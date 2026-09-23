@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 function Footer() {
   return (
-    <footer className="bg-black text-white mt-20">
+    <footer className="bg-black text-white ">
       <div className="max-w-5xl mx-auto px-6 py-16 grid grid-cols-2 md:grid-cols-4 gap-8">
         <div className="col-span-2 md:col-span-1">
           <h3 className="font-['Fraunces'] text-xl mb-3">SoundHouse</h3>

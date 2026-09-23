@@ -15,9 +15,9 @@ function Navbar() {
 
   return (
     <div className="sticky top-4 z-40 px-4">
-      <nav className="mx-auto max-w-5xl flex items-center justify-between px-8 py-4 rounded-full bg-white/60 backdrop-blur-xl backdrop-saturate-150 border border-white/40 shadow-[0_8px_30px_rgba(0,0,0,0.08)]">
+      <nav className="mx-auto max-w-5xl flex items-center justify-between px-4 md:px-8 py-3 md:py-4 rounded-full bg-white/60 backdrop-blur-xl backdrop-saturate-150 border border-white/40 shadow-[0_8px_30px_rgba(0,0,0,0.08)]">
         <Link to="/" className="text-lg font-medium tracking-tight">
-          SoundHouse
+          SoundScape
         </Link>
 
         <div className="flex gap-6 items-center text-gray-500">

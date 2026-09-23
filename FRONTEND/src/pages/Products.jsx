@@ -40,41 +40,43 @@ function Products() {
   return (
     <div className="min-h-screen bg-white text-black font-[Helvetica]">
       <Navbar />
-      <CategoryMenu />
 
       <div className="pt-24 px-6 pb-6">
-        <div className="grid grid-cols-3 items-center mb-10">
-          <div />
-
-          <h1 className="text-lg font-semibold text-center uppercase tracking-widest">
+        <div className="mb-10">
+          <h1 className="text-base md:text-lg font-semibold text-center uppercase tracking-widest mb-4">
             {category ? category : 'All Products'}
           </h1>
 
-          <div className="relative justify-self-end">
-            <button
-              onClick={() => setSortOpen(!sortOpen)}
-              className="flex items-center gap-2 border border-black px-4 py-2 text-xs uppercase tracking-widest hover:bg-black hover:text-white transition-colors"
-            >
-              <ArrowUpDown size={14} />
-              {currentSortLabel}
-            </button>
+          <div className="flex items-center justify-between">
+            <CategoryMenu />
 
-            {sortOpen && (
-              <div className="absolute right-0 mt-2 bg-white border border-black w-52 p-1 flex flex-col z-20">
-                {SORT_OPTIONS.map((option) => (
-                  <button
-                    key={option.value}
-                    onClick={() => handleSortChange(option.value)}
-                    className={`text-left px-4 py-2 text-xs uppercase tracking-widest transition-colors ${sort === option.value
-                        ? 'bg-black text-white'
-                        : 'text-gray-500 hover:bg-gray-100 hover:text-black'
+            <div className="relative">
+              <button
+                onClick={() => setSortOpen(!sortOpen)}
+                className="flex items-center gap-2 border border-black px-4 py-2 text-xs uppercase tracking-widest hover:bg-black hover:text-white transition-colors"
+              >
+                <ArrowUpDown size={14} />
+                {currentSortLabel}
+              </button>
+
+              {sortOpen && (
+                <div className="absolute right-0 mt-2 bg-white border border-black w-48 p-1 flex flex-col z-20">
+                  {SORT_OPTIONS.map((option) => (
+                    <button
+                      key={option.value}
+                      onClick={() => handleSortChange(option.value)}
+                      className={`text-left px-4 py-2 text-xs uppercase tracking-widest transition-colors ${
+                        sort === option.value
+                          ? 'bg-black text-white'
+                          : 'text-gray-500 hover:bg-gray-100 hover:text-black'
                       }`}
-                  >
-                    {option.label}
-                  </button>
-                ))}
-              </div>
-            )}
+                    >
+                      {option.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
 

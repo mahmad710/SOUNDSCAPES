@@ -39,7 +39,7 @@ function Register() {
 
     >
       <Navbar />
-      <div className="flex justify-center pt-24 px-6">
+      <div className="flex justify-center pt-10 pb-10 px-6">
         <div className="w-full max-w-md bg-white/90 backdrop-blur-xl backdrop-saturate-150 border border-white/40 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.15)] p-10">
           <div className="flex flex-col items-center mb-8">
             <div className="w-14 h-14 rounded-full bg-black text-white flex items-center justify-center mb-5">
